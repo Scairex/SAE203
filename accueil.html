@@ -13,8 +13,60 @@
 <body>
     <main>
         <h1>Vrouuuuuuuuuuuum</h1>
+        <input type="file" id="csvFile" accept=".csv">
+        <table id="csvTable"></table>
     </main>
-    <script src="index.js"></script>
+    <script>
+        document.getElementById('csvFile').addEventListener('change', handleFileSelect, false);
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const csvData = e.target.result;
+                processData(csvData);
+            };
+
+            reader.readAsText(file);
+        }
+
+        function processData(csvData) {
+            // Ici, vous pouvez écrire le code pour traiter les données CSV.
+            // Vous pouvez utiliser des bibliothèques JavaScript comme Papa Parse pour analyser le fichier CSV.
+            // Une fois les données traitées, vous pouvez les afficher dans la table HTML.
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script>
+        function processData(csvData) {
+            Papa.parse(csvData, {
+                header: true,
+                complete: function (results) {
+                    const csvTable = document.getElementById('csvTable');
+
+                    // Ajouter les en-têtes de colonnes à la table
+                    const headers = results.meta.fields;
+                    const headerRow = csvTable.insertRow();
+                    headers.forEach(function (header) {
+                        const cell = headerRow.insertCell();
+                        cell.textContent = header;
+                    });
+
+                    // Ajouter les lignes de données à la table
+                    results.data.forEach(function (row) {
+                        const dataRow = csvTable.insertRow();
+                        headers.forEach(function (header) {
+                            const cell = dataRow.insertCell();
+                            cell.textContent = row[header];
+                        });
+                    });
+                }
+            });
+        }
+    </script>
+
 </body>
 
 </html>
