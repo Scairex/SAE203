@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Choix administrateur</title>
+</head>
+
+<body>
+    <h2>Choisissez une option :</h2>
+    <form method="POST" action="tableauxadmin.php">
+        <select name="choix1" id="choix1" onchange="disableChoiceC()">
+            <option value="option1">Seismes</option>
+            <option value="option2">Meteorites</option>
+            <option value="option3">Pays</option>
+        </select><br>
+
+        <select name="choix2">
+            <option value="choixA">Ajouter valeurs</option>
+            <option value="choixB">Modifier valeurs</option>
+            <option value="choixC">Supprimer valeurs</option>
+        </select><br>
+
+        <input type="submit" value="Valider">
+    </form>
+</body>
+
+</html>
